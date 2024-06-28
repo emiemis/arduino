@@ -16,7 +16,7 @@ DHT dht(DHTPIN, DHTTYPE);
 void setup()
 {
   Serial.begin(9600);
-  lcd.begin(16, 2);  
+  lcd.begin(16, 2);
   dht.begin();
 }
 
@@ -24,39 +24,35 @@ void setup()
 void loop() {
 
    lcd.clear();
-
-   // luz
-   int luminosity = analogRead(portaLDR);
-   Serial.println(luminosity);
-
-   // humildade
-   float humidade = dht.readHumidity();
-   Serial.println(humidade);
-  
-   // calor
+    
+   // Leitura da humidade
+    float humidade = dht.readHumidity();
+   // Leitura da temperatura
    float temperatura = dht.readTemperature();
-   Serial.println(temperatura);
-
+   // Leitura da luz
+   int luz = analogRead(portaLDR);
+    
+    Serial.println(luz);
+    Serial.println(temperatura);
+    Serial.println(humidade);
     
     lcd.setCursor(0, 0);
     lcd.print("Luz:");
   
     lcd.setCursor(5, 0);
-    lcd.print(luminosity);
+    lcd.print(luz);
          
-    lcd.setCursor(0, 1);
-    lcd.print("calor:");
+    lcd.setCursor(9, 0);
+    lcd.print("C:");
   
-    lcd.setCursor(7, 1);
+    lcd.setCursor(12, 0);
     lcd.print(temperatura);
-    
-    lcd.setCursor(0, 2);
-    lcd.print("humildade:");
+
+    lcd.setCursor(0, 1);
+    lcd.print("humidade:");
   
-    lcd.setCursor(11, 2);
+    lcd.setCursor(10, 1);
     lcd.print(humidade);
-
+    
     delay(2000);
-
- 
 }
